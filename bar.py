@@ -26,3 +26,4 @@ def sig_disp(lcd, level=3):
     lcd.position(64, 0)
     lcd.data(sig[level])
     lcd.position(0, 0)
+

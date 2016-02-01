@@ -1,9 +1,11 @@
 # main.py -- put your code here!
 
 from machine import SPI, Pin
+
 import pyb
 import upcd8544
 import bar
+
 
 SPI    = SPI(1)
 RST    = Pin('X4')
