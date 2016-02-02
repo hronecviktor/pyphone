@@ -6,8 +6,11 @@ from pyb import Pin, udelay, delay
 
 
 class Keypad(object):
-
-    def __init__(self, row_pins, col_pins, mapping, set_udelay=15):
+    default_mapping = [['1', '2', '3', 'A'],
+                       ['4', '5', '6', 'B'],
+                       ['7', '8', '9', 'C'],
+                       ['*', '0', '#', 'D']]
+    def __init__(self, row_pins, col_pins, mapping=None, set_udelay=15):
         self._row_pins = []
         for row_pin in row_pins:
             pin = Pin(row_pin, mode=Pin.OUT_PP)
@@ -29,7 +32,9 @@ class Keypad(object):
             for col_index, col_pin in enumerate(self._col_pins):
                 if col_pin.value():
                     row_pin.low()
-                    return self._mapping[row_index][col_index]
+                    if self._mapping:
+                        return self._mapping[row_index][col_index]
+                    return row_index, col_index
             row_pin.low()
             udelay(self._udelay)
         return None

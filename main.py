@@ -8,6 +8,7 @@ import bar
 import pyb
 import upcd8544
 import bar
+from keypad import Keypad
 
 
 SPI    = SPI(1)
@@ -22,3 +23,10 @@ bar.bat_disp(lcd, level=3)
 pyb.delay(500)
 bar.sig_disp(lcd, level=3)
 
+kp = Keypad(('Y5', 'Y6', 'Y7', 'Y8'), ('Y1', 'Y2', 'Y3', 'Y4'))
+while True:
+    data = kp.get()
+    if data:
+        bt = data[0] * data[1] * 16
+        print(bt)
+        lcd.data([bt])
