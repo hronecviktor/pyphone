@@ -10,7 +10,8 @@ class Keypad(object):
                        ['4', '5', '6', 'B'],
                        ['7', '8', '9', 'C'],
                        ['*', '0', '#', 'D']]
-    def __init__(self, row_pins, col_pins, mapping=None, set_udelay=15):
+
+    def __init__(self, row_pins, col_pins, mapping=default_mapping, set_udelay=15):
         self._row_pins = []
         for row_pin in row_pins:
             pin = Pin(row_pin, mode=Pin.OUT_PP)
