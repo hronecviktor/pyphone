@@ -72,13 +72,14 @@ class TextWriter(object):
             characters = [chars.get(ch, chars["#"]) for ch in text]
         else:
             characters = [chars[ch] for ch in text]
-        self.lcd.data(*characters)
+        for char in characters:
+            self.lcd.data(char)
 
     def write(self, text, row=0, offset=0, position=POS_MID):
         self.lcd.position(offset, row)
         # check for non-defined characters
         for char in text:
-            assert char in chars
+            assert char in chars, "unknown character"
         length = 0
         for char in text:
             length += len(chars[char])
